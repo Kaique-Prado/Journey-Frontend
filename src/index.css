@@ -12,5 +12,14 @@ body, html, #root {
   color: white;
 }
 
+.rdp-root {
+  --rdp-accent-color: indigo;
+  --rdp-accent-background-color: #ff0000;
+  --rdp-accent-background-color: #14ae52;
+  --rdp-today-color: yellow;
+  
+}
+
+
 
 

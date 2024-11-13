@@ -30,7 +30,7 @@ function Login() {
             label="Senha"
             placeholder="Valor"
           />
-          <Link to="/trip/details"><button className={style.button_login}>Login</button></Link>
+          <Link to="/trips"><button className={style.button_login}>Login</button></Link>
           <a href="" className={style.forgot_password}>Esqueceu a senha?</a>
         </div>
         <div className={style.background_register}>

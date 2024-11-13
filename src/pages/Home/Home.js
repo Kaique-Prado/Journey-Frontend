@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import logo from "../../img/LogoMontanhaNome-Photoroom.png";
 import user from "../../img/MaleUser.png";
 import checkConfirmed from "../../img/CheckMark.png";
-import { CircleCheck, Link2, CircleDashed } from "lucide-react";
+import { CircleCheck, Link2, CircleDashed, UserCog2 } from "lucide-react";
 import Style from "./Home.module.css";
 import {
   MapPin,
@@ -119,7 +119,7 @@ function Home() {
 
               <div style={{ marginTop: "10px", marginBottom: "10px" }}>
                 <div className={Style.div_atv_details} >
-                  <img  style={{width: '25px', height: '25px'}}src={checkConfirmed} alt="" />
+                  <CircleDashed/>
                   <span>Academia em grupo</span>
                   <span style={{marginLeft: 'auto', color: '#9a9a9a', fontSize: '15px'}}>08:00h</span>
                 </div>
@@ -130,14 +130,13 @@ function Home() {
         <div>
           <div className={Style.links}>
             <h3 className={Style.nome_link}>Links importantes</h3>
-            <div style={{overflowY: 'auto'}}>
+            <div style={{overflowY: 'auto', height: '150px'}}>
               <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                 
                 <div style={{display: 'flex', flexDirection: 'column', marginTop: '20px', marginBotton: '20px', gap: '2px'}}>
                   <span style={{textIndent: '20px', display: 'block'}}>Reserva da casa</span>
                   
-                  <span style={{fontSize: "13px", color: "#5a5a5a", textIndent: '20px', display: 'block', overflow: 'hidden',
-                  textOverflow: 'ellipsis', whiteSpace: 'nowrap', width: '250px'}}>https://www.google.com</span>
+                  <a href="https://www.google.com"  className={Style.url_links}>https://www.google.com</a>
                 </div>
                 <Link2 style={{marginRight: '10px'}} />
               </div>
@@ -157,43 +156,38 @@ function Home() {
           <div className={Style.participantes}>
             <h3 className={Style.nome_participantes}>Convidados</h3>
             
-            <div style={{overFlowY: 'auto'}}>
+            <div style={{overflowY: 'auto', height: '200px'}}>
+              
               <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                  
                   <div style={{display: 'flex', flexDirection: 'column', marginTop: '20px', marginBotton: '20px', gap: '2px'}}>
                     <span style={{textIndent: '20px', display: 'block'}}>Jessica Person</span>
                     
-                    <span style={{fontSize: "13px", color: "#5a5a5a", textIndent: '20px', display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', width: '250px'}}>jessicaperson@gmail.com</span>
+                    <span style={{fontSize: "13px", color: "#5a5a5a", textIndent: '20px', display: 'block', overflow: 'hidden',
+                    textOverflow: 'ellipsis', whiteSpace: 'nowrap', width: '250px'}}>jessicaperson@gmail.com</span>
                   </div>
-                  <CircleDashed style={{marginRight: '10px', width: '25px', height: '25px'}} />
+                  <CircleDashed style={{marginRight: '10px'}} />
                 </div>
 
                 <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                   
                   <div style={{display: 'flex', flexDirection: 'column', marginTop: '20px', marginBotton: '20px', gap: '2px'}}>
-                    <span style={{textIndent: '20px', display: 'block'}}>Harvey Specter</span>
+                    <span style={{textIndent: '20px', display: 'block'}}>Haarvey Specter</span>
                     
-                    <span style={{fontSize: "13px", color: "#5a5a5a", textIndent: '20px', display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', width: '250px'}}>harvey@gmail.com</span>
+                    <span style={{fontSize: "13px", color: "#5a5a5a", textIndent: '20px', display: 'block', overflow: 'hidden',
+                    textOverflow: 'ellipsis', whiteSpace: 'nowrap', width: '250px'}}>harveyspecter@gmail.com</span>
                   </div>
-                  <img  style={{width: '25px', height: '25px', marginRight: '10px'}}src={checkConfirmed} alt="" />
+                  <img src={checkConfirmed} alt=""  style={{height: '25px', width: '25px', marginRight: '10px'}}/>
                 </div>
 
-                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-                  
-                  <div style={{display: 'flex', flexDirection: 'column', marginTop: '20px', marginBotton: '20px', gap: '2px'}}>
-                    <span style={{textIndent: '20px', display: 'block'}}>Harvey Specter</span>
-                    
-                    <span style={{fontSize: "13px", color: "#5a5a5a", textIndent: '20px', display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', width: '250px'}}>harvey@gmail.com</span>
-                  </div>
-                  <img  style={{width: '25px', height: '25px', marginRight: '10px'}}src={checkConfirmed} alt="" />
-                </div>
             </div>
-              
-              <div className={Style.container_button_participantes}>
-                <button className={Style.button_participantes}>
-                  Gerenciar convidados
-                  <Plus />
-                </button>
-              </div>
+
+            <div className={Style.container_button_participantes}>
+              <button className={Style.button_participantes}>
+                Gerenciar convidados
+                <UserCog2 />
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -312,7 +306,7 @@ function Home() {
                 style={{
                   backgroundColor: "#14ae5c",
                   width: "90%",
-                  height: "6vh",
+                  height: "50px",
                   border: "none",
                   borderRadius: "15px",
                   marginLeft: "5%",

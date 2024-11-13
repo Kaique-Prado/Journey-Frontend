@@ -62,17 +62,17 @@
 
     .alterar_button {
       background-color: #5856d6;
-      width: 230px;
+      width: 240px;
       height: 40px;
       border-radius: 30px;
       border: none;
-      margin-right: 0.5em;
+      margin-right: 10px;
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-
+      
       .arrow {
         margin-left: 0.5em;
         width: 20px;
@@ -186,6 +186,21 @@
         cursor: pointer;
       }
     }
+
+    .url_links{
+      font-size: 13px;
+      color: #5a5a5a;
+      text-indent:20px; 
+      display: block;
+      overflow: hidden;   
+      text-overflow: ellipsis;
+      white-space: nowrap; 
+      width: 250px;
+    }
+
+    .url_links:hover{
+      color: #ffff;
+    }
   }
 
   .participantes {
@@ -222,8 +237,8 @@
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        gap: 1em;
         bottom: 10px;
+        gap: 1em;
         left: 1em;
         cursor: pointer;
       }
@@ -355,7 +370,7 @@
       width: 90%;
       margin-left: 5.0%;
       background-color: #3a3a3a;
-      height: 5vh;
+      height: 50px;
       border-radius: 10px;
       display: flex;
       flex-direction: row;
@@ -375,7 +390,7 @@
       width: 90%;
       margin-left: 5.0%;
       background-color: #3a3a3a;
-      height: 5vh;
+      height: 50px;
       border-radius: 10px;
       display: flex;
       flex-direction: row;
