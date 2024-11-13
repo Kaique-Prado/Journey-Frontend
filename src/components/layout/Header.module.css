@@ -1,0 +1,39 @@
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+    
+}
+
+.lgo{
+    width: 125px;
+    height: 135px;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+}
+
+.lista{
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    padding-top: 20px;
+}
+
+.lista li{
+    margin-right: 5em;
+}
+
+.botao {
+    background-color: #14AE5C;
+    width: 150px;
+    height: 60px;
+    border: none;
+    border-radius: 8px;
+    font-size: larger;
+    margin-right: 20px;
+    cursor: pointer;
+}
