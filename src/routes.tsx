@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Informacao from "./pages/Informacao/Informacao";
 import Registrar from "./pages/Registrar/Registrar";
@@ -13,7 +12,7 @@ const RoutesHtml = () => {
     <>
       <Router>
         <Routes>
-            <Route  default path="/" element={<Informacao />}></Route>
+            <Route path="/" element={<Informacao />}></Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/registrar" element={<Registrar />} ></Route>
             <Route path="/trip/:tripId" element={<Home />}></Route>

@@ -2,10 +2,21 @@ import User from "../../img/MaleUser.png";
 import { useState } from "react";
 import Style from "./Viagens.module.css";
 import { Link } from "react-router-dom";
-import { X, Plus } from "lucide-react";
+import { X, Plus, ArrowRight } from "lucide-react";
+import { api } from "../../lib/axios"
 
 function Viagens() {
   const [isModalUser, setModalUser] = useState(false);
+  const [isModalViagem, setModalViagem] = useState(false);
+  
+  /*async function viewTrip() {
+    const response = await api.get('/trips/${id}', {
+      destination: destination,
+      starts_at: isDateStartEnd.from,
+      ends_at: isDateStartEnd.to,
+  })
+
+  }*/
 
   function AbrirModalUser() {
     setModalUser(true);
@@ -36,6 +47,7 @@ function Viagens() {
         }}
       >
         <div style={{display: "flex", flexDirection: "row", justifyContent: "center",}}>
+          
           <h2 style={{marginTop: '10px'}}>Viagens</h2>
           <Link to='/trip/create'><button style={{display: 'flex', marginTop: '10px' , position: 'relative', left: '160px', backgroundColor:'#14ae5c', border: 'none', width: '50px', height:'30px', alignItems: 'center', justifyContent: 'center', borderRadius: '8px', cursor: 'pointer'}}>
             <Plus />
@@ -43,8 +55,22 @@ function Viagens() {
           </Link>
         </div>
         <div>
+          <div style={{backgroundColor: '#3a3a3a', borderRadius: '8px', marginLeft: '10px', marginRight: '10px', marginTop: '10px', height: '30px'}}>
+            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+              <div style={{display: 'flex', alignItems: 'baseline'}}>
+                <div style={{textIndent: '10px'}}>Contagem</div>
+                <div style={{fontSize: '13px', color:'#8a8a8a', marginLeft: '10px' }} >8hrs</div>
+              </div>
+              <div style={{display: 'flex', justifyContent: 'center'}}>
+                <button style={{backgroundColor: '#14ae52', border: 'none', cursor: 'pointer', borderRadius: '8px', marginRight: '10px', display: 'flex', justifyContent: 'center', marginTop: '3px'}}>
+                  <ArrowRight />
+                </button>
+              </div>
+            </div>
+          </div>
 
         </div>
+      
       </div>
 
       {isModalUser && (

@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import logo from "../../img/LogoMontanhaNome-Photoroom.png";
-import user from "../../img/MaleUser.png";
-import checkConfirmed from "../../img/CheckMark.png";
+import user from "../../img/MaleUser.png"
+import checkConfirmed from "../../img/CheckMark.png"
 import { CircleCheck, Link2, CircleDashed, UserCog2 } from "lucide-react";
-import Style from "./Home.module.css";
+import Style from "./Home.module.css"
 import {
   MapPin,
   Calendar,
@@ -14,11 +14,33 @@ import {
   X,
   Clock,
 } from "lucide-react";
+import { api } from "../../lib/axios";
+import { useEffect } from "react";
+import { format } from "date-fns";
+
+
+
+interface Trip {
+  id: bigint
+  destination: string
+  starts_at: string
+  ends_at: string
+  is_confirmed: boolean
+}
 
 function Home() {
+  const {tripId} = useParams()
   const [isModalAtividade, setModalAtividade] = useState(false);
   const [isModalLink, setModalLink] = useState(false);
   const [isModalUser, setModalUser] = useState(false);
+  const [trip, setTrip] = useState<Trip | undefined>()
+  
+  useEffect(() => {
+    
+    api.get(`trips/${tripId}`).then(response => setTrip(response.data))
+  }, [tripId])
+
+  const displayDate = trip ? format(trip.starts_at, "d' de 'LLL").concat(' até ').concat(format(trip.ends_at, "d' de 'LLL")) : null
 
   function AbrirModalCadastrarAtividade() {
     setModalAtividade(true);
@@ -44,13 +66,18 @@ function Home() {
     <>
       <header className={Style.cabecalho}>
         <img src={logo} className={Style.logo} alt="logo" />
+        
         <div className={Style.viagem}>
           <MapPin className={Style.map} />
-          <p className={Style.local}>Você não tem uma viagem</p>
+          <p className={Style.local}>{trip?.destination}</p>
+          
           <div className={Style.separacao}></div>
+          
           <Calendar className={Style.calendar} />
-          <p className={Style.data}>N/A</p>
+          <p className={Style.data}>{displayDate}</p>
+          
           <div className={Style.separacao2}></div>
+          
           <button className={Style.alterar_button}>
             Alterar local/data
             <ArrowRight className={Style.arrow} />
@@ -133,7 +160,7 @@ function Home() {
             <div style={{overflowY: 'auto', height: '150px'}}>
               <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                 
-                <div style={{display: 'flex', flexDirection: 'column', marginTop: '20px', marginBotton: '20px', gap: '2px'}}>
+                <div style={{display: 'flex', flexDirection: 'column', marginTop: '20px', marginBottom: '20px', gap: '2px'}}>
                   <span style={{textIndent: '20px', display: 'block'}}>Reserva da casa</span>
                   
                   <a href="https://www.google.com"  className={Style.url_links}>https://www.google.com</a>
@@ -160,7 +187,7 @@ function Home() {
               
               <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                   
-                  <div style={{display: 'flex', flexDirection: 'column', marginTop: '20px', marginBotton: '20px', gap: '2px'}}>
+                  <div style={{display: 'flex', flexDirection: 'column', marginTop: '20px', marginBottom: '20px', gap: '2px'}}>
                     <span style={{textIndent: '20px', display: 'block'}}>Jessica Person</span>
                     
                     <span style={{fontSize: "13px", color: "#5a5a5a", textIndent: '20px', display: 'block', overflow: 'hidden',
@@ -171,7 +198,7 @@ function Home() {
 
                 <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                   
-                  <div style={{display: 'flex', flexDirection: 'column', marginTop: '20px', marginBotton: '20px', gap: '2px'}}>
+                  <div style={{display: 'flex', flexDirection: 'column', marginTop: '20px', marginBottom: '20px', gap: '2px'}}>
                     <span style={{textIndent: '20px', display: 'block'}}>Haarvey Specter</span>
                     
                     <span style={{fontSize: "13px", color: "#5a5a5a", textIndent: '20px', display: 'block', overflow: 'hidden',

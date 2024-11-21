@@ -5,9 +5,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Registrar() {
-  const [nome, setNome] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [nome, setNome] = useState<string>();
+  const [email, setEmail] = useState<string>();
+  const [password, setPassword] = useState<string>();
   return (
     <>
       <div className={style.container_form}>

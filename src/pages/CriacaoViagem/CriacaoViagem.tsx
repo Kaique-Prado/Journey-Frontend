@@ -1,23 +1,27 @@
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import {Link} from 'react-router-dom'
 import style from './CriacaoViagem.module.css'
 import { MapPin, Calendar, AtSign, X, Plus  } from 'lucide-react'
-import { DayPicker} from "react-day-picker";
+import { DateRange, DayPicker} from "react-day-picker";
 import { format } from 'date-fns'
 import "react-day-picker/style.css";
-import classNames from "react-day-picker/style.module.css";
+import { api } from "../../lib/axios"
+import { useNavigate } from "react-router-dom";
 
 
 function CriacaoViagem() {
+    const navigate = useNavigate()
     const [isModalEmail, setModalEmail] = useState(false)
-    const [emailInvite, setEmailInvite] = useState([])
+    const [emailInvite, setEmailInvite] = useState([''])
     const [isDatePicker, setDatePicker] = useState(false)
-    const [isDateStartEnd, setDateStartEnd] = useState()
+    const [isDateStartEnd, setDateStartEnd] = useState<DateRange |undefined>()
     const [destination, setDestination] = useState('')
     
     const css = '.today{ color: #ffff }'
 
-    const displayDate = isDateStartEnd ? format(isDateStartEnd.from, "d' de 'LLL").concat(' até ').concat(format(isDateStartEnd.to, "d' de 'LLL")) : null
+    const displayDate = isDateStartEnd && isDateStartEnd.from && isDateStartEnd.to 
+    ? format(isDateStartEnd.from, "d' de 'LLL").concat(' até ').concat(format(isDateStartEnd.to, "d' de 'LLL"))
+    : null
 
 
     function openDatePicker(){
@@ -35,17 +39,38 @@ function CriacaoViagem() {
         setModalEmail(false)
     }
 
-    function createTrip(event) {
+    async function createTrip(event : FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        console.log(destination)
-        console.log(isDateStartEnd)
-        console.log(emailInvite)
+        
+        if (!destination) {
+            return
+        }
+      
+        if (!isDateStartEnd?.from || !isDateStartEnd?.to) {
+            return
+        }
+      
+        if (emailInvite.length === 0) {
+            return
+        }
+
+        const response = await api.post('/trips', {
+            destination: destination,
+            starts_at: isDateStartEnd.from,
+            ends_at: isDateStartEnd.to,
+            emails_to_invite: emailInvite
+        })
+
+        const { tripId } = response.data
+
+        navigate(`/trips/${tripId}`)
     }
 
-    function addEmail(event){
+    function addEmail(event : FormEvent<HTMLFormElement>){
         event.preventDefault()
+        
         const data = new FormData(event.currentTarget)
-        const email = data.get('email')
+        const email = data.get('email')?.toString()
 
         if(!email){
             return
@@ -63,7 +88,7 @@ function CriacaoViagem() {
         event.currentTarget.reset()
     }
 
-    function deleteEmail(emailToRemove){
+    function deleteEmail(emailToRemove : string){
         const newEmailList = emailInvite.filter( email => email !== emailToRemove)   
         setEmailInvite(newEmailList)
     }
@@ -79,7 +104,7 @@ function CriacaoViagem() {
                     <div className={style.div_local_data}>
                         <div className={style.div_local}>
                             <MapPin style={{height: '3vh', marginLeft: '0.5vw', marginRight: '0.5vw' }} />
-                            <input onChange={event => setDestination(event.target.value)} className={style.input_local} type="text" placeholder='local da viagem' />
+                            <input onChange={event => setDestination(event.target.value)} className={style.input_local} type="text" placeholder='local da viagem' />    
                         </div>
                         <div className={style.div_data}>
                             <Calendar style={{height: '3vh', marginLeft: '0.5vw', marginRight: '0.5vw'}} />
@@ -90,7 +115,7 @@ function CriacaoViagem() {
                     </div>
                     <div className={style.div_email}>
                         <AtSign style={{height: '3vh', marginLeft: '0.5vw', marginRight: '0.5vw'}} />                  
-                        {emailInvite >= 0 ? (
+                        {emailInvite.length === 0 ? (
                             <span onClick={openModalEmail} style={{fontSize: '13px' ,color: '#7a7a7a', display: 'flex', justifyContent: 'center'  }}>Email do participante</span>
                         ):(
                             <span onClick={openModalEmail} style={{fontSize: '13px' ,color: '#ffff', display: 'flex', justifyContent: 'center'  }}>{emailInvite.length} pessoa(s) convidada(s)</span>
